@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ export class HomeComponent implements OnInit {
 
     tiles;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
       this.tiles = [
@@ -19,4 +20,10 @@ export class HomeComponent implements OnInit {
           {text: 'Four', cols: 2, rows: 1, color: '#DDBDF1'},
       ];
   }
+
+    goToSearchTravelList() {
+        this.router.navigate(['search-travel']);
+    }
 }
+
+

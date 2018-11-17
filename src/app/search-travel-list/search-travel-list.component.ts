@@ -10,6 +10,7 @@ export class SearchTravelListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('000000000');
   }
 
 }
