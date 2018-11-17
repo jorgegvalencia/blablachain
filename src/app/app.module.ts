@@ -17,7 +17,6 @@ import {
     MatNativeDateModule
 } from '@angular/material';
 import {Web3Service} from './util/web3.service';
-import {BankModule} from './components/bank/bank.module';
 import {HomeComponent} from './home/home.component';
 import { SearchTravelListComponent } from './search-travel-list/search-travel-list.component';
 import { MyTravelListComponent } from './my-travel-list/my-travel-list.component';
@@ -45,7 +44,6 @@ import { NewTravelComponent } from './new-travel/new-travel.component';
         BrowserModule,
         FormsModule,
         HttpClientModule,
-        BankModule
     ],
     providers: [Web3Service],
     bootstrap: [AppComponent]

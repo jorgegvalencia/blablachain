@@ -26,16 +26,22 @@ contract TravelsContract {
         require(msg.value == 5 * passengers && passengers >= 1, "");
         travelsCount++;
         travels.push(
-            Travel(travelsCount, from, to, when, prize, passengers, 1, new address[](passengers+1), new address[](passengers+1), new address[](passengers+1), msg.sender, false, false));
+            Travel(travelsCount, from, to, when, prize, passengers, 1, 0, new address[](passengers+1), new address[](passengers+1), new address[](passengers+1), msg.sender, false, false));
         return travelsCount;
     }
 
     function getTravel(uint travelId) public view returns(string, string, uint, uint, uint){
-        return(travels[travelId].from, 
-        travels[travelId].to,
-        travels[travelId].when,
-        travels[travelId].numPassengers,
-        travels[travelId].numPassengersReserved);
+        if(!travels[travelId].travelFinish){
+            return(travels[travelId].from, 
+            travels[travelId].to,
+            travels[travelId].when,
+            travels[travelId].numPassengers,
+            travels[travelId].numPassengersReserved);
+        }
+        else {
+            return("","",0,0, 0);
+        }
+
     }
 
     function reserveTravel(uint travelId) public payable returns (uint){
@@ -51,11 +57,12 @@ contract TravelsContract {
         Travel travel = travels[travelId];
         require(msg.value == travel.prize / 2, "");
         travel.passengersPayed.push(msg.sender);
+        travel.numPassengersPayed++;
     }
 
     function initTravel(uint travelId) public onlyDriver(travels[travelId].driverAddress) {
         Travel travel = travels[travelId];
-       // require(now >= travel.when + 15, "");
+        require(now > travel.when + 15*60 || travel.numPassengersPayed == travel.numPassengersReserved, "");
         travel.travelStarted = true;
     }
   
@@ -78,7 +85,7 @@ contract TravelsContract {
 
     function makeReport(uint travelId, uint passenger) onlyPassengers(travels[travelId].passengersAddress[passenger]) public{
         Travel travel = travels[travelId];
-       // require(now >= travel.when + 15, "");
+        require(now >= travel.when + 15*60 && !travels[travelId].travelStarted, "");
         travel.travelReported.push(msg.sender);
     }
 
@@ -99,6 +106,7 @@ contract TravelsContract {
         uint prize;
         uint numPassengers;
         uint numPassengersReserved;
+        uint numPassengersPayed;
         address[] passengersAddress;
         address[] passengersPayed;
         address[] travelReported;
