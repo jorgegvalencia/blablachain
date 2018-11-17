@@ -1,8 +1,7 @@
-var MathLib = artifacts.require("./MathLib.sol");
-var SimpleBank = artifacts.require("./SimpleBank.sol");
+var Travels = artifacts.require("./TravelsContract.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(MathLib);
-  deployer.link(MathLib, SimpleBank);
-  deployer.deploy(SimpleBank);
+ // deployer.deploy(MathLib);
+  deployer.deploy(Travels);
+ // deployer.deploy(SimpleBank);
 };
