@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+    constructor(private router: Router) {
+    }
+
+    goToFindTravel() {
+        this.router.navigate(['home']);
+    }
+
+    goToNewTravel() {
+        this.router.navigate(['new-travel']);
+    }
+
+    goToSearchMyTravels() {
+        this.router.navigate(['my-travel']);
+    }
 }

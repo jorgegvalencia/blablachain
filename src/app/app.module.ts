@@ -15,7 +15,7 @@ import {
     MatToolbarModule,
     MatGridListModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule, MatIconModule
 } from '@angular/material';
 import {Web3Service} from './util/web3.service';
 import {HomeComponent} from './home/home.component';
@@ -24,8 +24,11 @@ import { MyTravelListComponent } from './my-travel-list/my-travel-list.component
 import { NewTravelComponent } from './new-travel/new-travel.component';
 
 const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'search-travel', component: SearchTravelListComponent }
+    { path: 'home', component: HomeComponent },
+    { path: 'search-travel', component: SearchTravelListComponent },
+    { path: 'my-travel',  component: MyTravelListComponent },
+    { path: 'new-travel',  component: NewTravelComponent },
+    { path: '', pathMatch: 'full', redirectTo: 'home' }
 ];
 
 @NgModule({
@@ -47,6 +50,7 @@ const routes: Routes = [
         MatGridListModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        MatIconModule,
         BrowserModule,
         FormsModule,
         HttpClientModule,
