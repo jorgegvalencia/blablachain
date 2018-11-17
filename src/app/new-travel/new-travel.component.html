@@ -1,3 +1,26 @@
-<p>
-  new-travel works!
-</p>
+<mat-grid-list cols="1" rowHeight="80px" class="search-box">
+  <mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-form-field class="border-input">
+      <input matInput placeholder="Desde" value="">
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-form-field class="border-input">
+      <input matInput placeholder="Hasta" value="">
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-form-field class="border-input">
+      <input matInput placeholder="Pasajeros" value="">
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
+</mat-grid-list>
