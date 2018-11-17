@@ -1,0 +1,29 @@
+.search-box {
+    /*color: white;*/
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-image: url('/src/assets/img/travel1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.border-input {
+    margin: 0 5px;
+}
+
+.color-white {
+    color: white;
+}
+
+.margin-left-s {
+    margin-left: 5px;
+}
+
+.search-box-content {
+    background-color: #ffffffcc;
+    padding: 0 15px;
+    border-radius: 10px;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-label {
+}
+
