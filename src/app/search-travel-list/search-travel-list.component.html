@@ -1,25 +1,5 @@
-<mat-card class="card">
-  <p>Desde: Madrid<span class="floatR">09:09</span></p>
-  <p>Hasta: Barcelona</p>
-</mat-card>
-
-<mat-card class="card">
-  <p>Desde: Madrid<span class="floatR">09:09</span></p>
-  <p>Hasta: Barcelona</p>
-</mat-card>
-
-<mat-card class="card">
-  <p>Desde: Madrid<span class="floatR">09:09</span></p>
-  <p>Hasta: Barcelona</p>
-</mat-card>
-
-<mat-card class="card">
-  <p>Desde: Madrid<span class="floatR">09:09</span></p>
-  <p>Hasta: Barcelona</p>
-</mat-card>
-
-<mat-card class="card">
-  <p>Desde: Madrid<span class="floatR">09:09</span></p>
-  <p>Hasta: Barcelona</p>
+<mat-card class="card" *ngFor="let travel of travelsList" (click)="reserveTravel(travel)">
+  <p>Desde: {{travel.origin}}<span class="floatR">09:09</span></p>
+  <p>Hasta: {{travel.destination}}</p>
 </mat-card>
 

@@ -20,33 +20,35 @@ contract TravelsContract {
         require(msg.sender == _passengerAdrress, "No driver Address");
         _;
     }
-    
+
   // Adopting pet function
     function setTravel(string from, string to, uint when, uint prize, uint passengers) public payable returns (uint){
-        require(msg.value == 5 * passengers && passengers >= 1, "");
+        //require(msg.value == 5 * passengers && passengers >= 1, "");
         travelsCount++;
         travels.push(
             Travel(travelsCount, from, to, when, prize, passengers, 1, 0, new address[](passengers+1), new address[](passengers+1), new address[](passengers+1), msg.sender, false, false));
         return travelsCount;
     }
 
-    function getTravel(uint travelId) public view returns(string, string, uint, uint, uint){
+    function getTravel(uint travelId) public view returns(uint, string, string, uint, uint, uint){
         if(!travels[travelId].travelFinish){
-            return(travels[travelId].from, 
+            return(
+            travels[travelId].id,
+            travels[travelId].from,
             travels[travelId].to,
             travels[travelId].when,
             travels[travelId].numPassengers,
             travels[travelId].numPassengersReserved);
         }
         else {
-            return("","",0,0, 0);
+            return(0,"","",0,0, 0);
         }
 
     }
 
     function reserveTravel(uint travelId) public payable returns (uint){
-        Travel travel = travels[travelId];
-        require(msg.value == travel.prize/2 && travel.numPassengersReserved < travel.numPassengers, "");
+        Travel storage travel = travels[travelId];
+       // require(msg.value == travel.prize/2 && travel.numPassengersReserved < travel.numPassengers, "");
         travel.numPassengersReserved++;
         travel.passengersAddress[travel.numPassengersReserved] = msg.sender;
         return travel.numPassengersReserved;
@@ -54,7 +56,7 @@ contract TravelsContract {
 
     function makePayment(uint travelId, uint passenger) public
     onlyPassengers(travels[travelId].passengersAddress[passenger]) payable returns (uint) {
-        Travel travel = travels[travelId];
+        Travel storage travel = travels[travelId];
         require(msg.value == travel.prize / 2, "");
         travel.passengersPayed.push(msg.sender);
         travel.numPassengersPayed++;
@@ -65,11 +67,11 @@ contract TravelsContract {
         require(now > travel.when + 15*60 || travel.numPassengersPayed == travel.numPassengersReserved, "");
         travel.travelStarted = true;
     }
-  
+
     function finishTravel(uint travelId) public onlyDriver(travels[travelId].driverAddress) {
-        Travel travel = travels[travelId];
+        Travel storage travel = travels[travelId];
         travel.travelFinish = true;
-   
+
         for(uint i = 1; i<travel.numPassengersReserved + 1; i++){
             if(travel.passengersPayed[i] != 0){
                 msg.sender.transfer(travel.prize);
@@ -93,7 +95,7 @@ contract TravelsContract {
         for(uint i = 1; i < travels[travelId].numPassengersReserved + 1; i++){
             if(travels[travelId].passengersAddress[i] == msg.sender){
                 return i;
-            } 
+            }
         }
         return 0;
     }

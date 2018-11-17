@@ -1,24 +1,29 @@
-import { Component } from '@angular/core';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { TravelsContractService } from './util/travels-contract.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-    constructor(private router: Router) {
-    }
+export class AppComponent implements OnInit {
+  constructor(private router: Router, private travels: TravelsContractService) {
+  }
 
-    goToFindTravel() {
-        this.router.navigate(['home']);
-    }
+  ngOnInit() {
+    this.travels.initContract();
+  }
 
-    goToNewTravel() {
-        this.router.navigate(['new-travel']);
-    }
+  goToFindTravel() {
+    this.router.navigate(['home']);
+  }
 
-    goToSearchMyTravels() {
-        this.router.navigate(['my-travel']);
-    }
+  goToNewTravel() {
+    this.router.navigate(['new-travel']);
+  }
+
+  goToSearchMyTravels() {
+    this.router.navigate(['my-travel']);
+  }
 }

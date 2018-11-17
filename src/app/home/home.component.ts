@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import { Web3Service } from '../util/web3.service';
+import value from '*.json';
+import { TravelsContractService, Travel } from '../util/travels-contract.service';
 
 @Component({
     selector: 'app-home',
@@ -8,15 +11,16 @@ import {Router} from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-    constructor(private router: Router) {
-    }
+  Travels: any;
 
-    ngOnInit() {
-    }
+  constructor(private travels: TravelsContractService, private router: Router) { }
 
-    goToSearchTravelList() {
-        this.router.navigate(['search-travel']);
-    }
+  goToSearchTravelList() {
+    this.router.navigate(['search-travel']);
+  }
+
+  ngOnInit() {
+  }
 }
 
 

@@ -2,25 +2,37 @@
   <mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
   <mat-grid-tile [colspan]="1" [rowspan]="1">
     <mat-form-field class="border-input">
-      <input matInput placeholder="Desde" value="">
+      <input matInput placeholder="Desde" name="Desde" value="" [(ngModel)]="model.origin">
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="1" [rowspan]="1">
     <mat-form-field class="border-input">
-      <input matInput placeholder="Hasta" value="">
+      <input matInput placeholder="Hasta" name="Hasta" value="" [(ngModel)]="model.destination">
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="1" [rowspan]="1">
     <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="model.travelDate" name="travelDate">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="1" [rowspan]="1">
     <mat-form-field class="border-input">
-      <input matInput placeholder="Pasajeros" value="">
+      <input matInput placeholder="Precio" name="Precio" value="" [(ngModel)]="model.price">
     </mat-form-field>
   </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-form-field class="border-input">
+      <input matInput placeholder="Pasajeros" name="Pasajeros" value="" [(ngModel)]="model.passengers">
+    </mat-form-field>
+  </mat-grid-tile>
+<mat-grid-tile [colspan]="1"  [rowspan]="1">
+  <button mat-raised-button
+    color="primary"
+    class="margin-left-s"
+    (click)="toggleNewTravel()">Crear viaje
+  </button>
+</mat-grid-tile>
   <mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
 </mat-grid-list>
